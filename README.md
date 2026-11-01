@@ -30,7 +30,7 @@ Hearing, thinking and speaking all run on your Mac. No account, no API key.
 
 - BRO listens by itself. Just speak, and it answers when you stop talking.
 - Show or hide the orb: **Option + B**.
-- Say "text bar" to type to BRO instead of speaking.
+- Say "text bar" or press **Option + T** to open the text bar and type to BRO.
 - While BRO is playing its own songs it cannot hear you over the music. In that case, hold **Option + Space** while you speak, and let go when you are done. You can also press it to make BRO stop talking.
 
 ## What you can say

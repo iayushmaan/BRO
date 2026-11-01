@@ -12,6 +12,7 @@ Hearing, thinking and speaking all run on your Mac. No account, no API key.
 - A Mac with Apple Silicon (M1 or newer). Intel Macs do not work.
 - macOS 14 or newer.
 - About 3 GB free disk space. On first run BRO downloads its models (about 2.5 GB) once, so you need internet the first time.
+- Tested only on a MacBook Air M4. Other Macs are untested.
 
 ## Install (the easy way)
 

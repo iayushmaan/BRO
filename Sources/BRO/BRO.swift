@@ -2478,6 +2478,8 @@ func parseCommand(_ text: String) -> VoiceCommand? {
     }
     // "open downloads", "open the desktop folder", "open my songs folder"
     if firstWord == "open" {
+        // v59: "open bro screenshots folder" opens Pictures > BRO Screenshots (before, the word "screenshots" took a new screenshot)
+        if !wset.isDisjoint(with: ["screenshot", "screenshots"]) { return .openFolder(NSHomeDirectory() + "/Pictures/BRO Screenshots") }
         let folders: [String: String] = ["downloads": "Downloads", "desktop": "Desktop", "documents": "Documents",
                                          "pictures": "Pictures", "movies": "Movies"]
         if wset.contains("songs") && wset.contains("folder") { return .openFolder(localMusicFolder) }
@@ -2715,7 +2717,8 @@ func parseCommand(_ text: String) -> VoiceCommand? {
     if joined.contains("go to sleep") || joined == "sleep now" || (wset.contains("sleep") && !wset.isDisjoint(with: macWords)) {
         return .sleepMac
     }
-    if joined.contains("screenshot") || joined.contains("screen shot") || joined.contains("screen capture") {
+    if (joined.contains("screenshot") || joined.contains("screen shot") || joined.contains("screen capture")
+        || (wset.contains("ss") && w.count <= 5)) && !wset.contains("folder") {
         return .screenshot
     }
 
@@ -3715,6 +3718,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
                 DispatchQueue.main.async { self.reply("Done. I ran \(exact).") }
             }
         case .openFolder(let path):
+            try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true)
             NSWorkspace.shared.open(URL(fileURLWithPath: path))
             speak("Opening the folder.")
         case .wifiPower(let on):
@@ -3915,16 +3919,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, AVSpeechSynthesizerDel
             let orbWasVisible = panel.isVisible
             let textWasVisible = textPanel?.isVisible ?? false
             if orbWasVisible { panel.orderOut(nil) }
-            if textWasVisible { textPanel?.orderOut(nil) }
+            if textWasVisible { textPanel?.alphaValue = 0 }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                 guard let self = self else { return }
                 _ = runTool("/usr/sbin/screencapture", ["-x", path])
                 if orbWasVisible { self.panel.orderFrontRegardless() }
-                if textWasVisible { self.textPanel?.orderFront(nil) }
+                if textWasVisible { self.textPanel?.alphaValue = 1 }
                 if FileManager.default.fileExists(atPath: path) {
                     self.speak("Screenshot saved in your Pictures folder.")
                 } else if !CGPreflightScreenCaptureAccess() {
-                    _ = CGRequestScreenCaptureAccess()
+                    // v59: no system pop-up from inside BRO (it can crash the app); open the Screen Recording page instead
+                    if let u = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture") {
+                        NSWorkspace.shared.open(u)
+                    }
                     self.speak("I need Screen Recording permission. In System Settings, Privacy and Security, Screen Recording, switch BRO off and on, then quit and reopen BRO.")
                 } else {
                     self.speak("Screen Recording is allowed, but I could not save the screenshot. Please try again.")

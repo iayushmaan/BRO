@@ -101,3 +101,32 @@ Open `Sources/BRO/BRO.swift` and look at the "Easy settings" at the top: your na
 ## License
 
 MIT. See `LICENSE`.
+
+
+
+---
+
+<h2 align="center">BRO — Visual States</h2>
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="assets/idle.png" width="350"><br>
+      <b>IDLE</b>
+    </td>
+    <td align="center">
+      <img src="assets/listening.png" width="350"><br>
+      <b>LISTENING</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="assets/thinking.png" width="350"><br>
+      <b>THINKING</b>
+    </td>
+    <td align="center">
+      <img src="assets/speaking.png" width="350"><br>
+      <b>SPEAKING</b>
+    </td>
+  </tr>
+</table>

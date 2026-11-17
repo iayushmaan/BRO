@@ -3,7 +3,7 @@
 BRO is a small voice assistant for the Mac. A glowing orb floats on your screen, listens to you, and answers out loud.
 Hearing, thinking and speaking all run on your Mac. No account, no API key.
 
-- **Hearing:** [WhisperKit](https://github.com/argmaxinc/argmax-oss-swift) (Whisper small, multilingual). You can speak English, Hindi or Hinglish; BRO hears it as English text.
+- **Hearing:** [WhisperKit](https://github.com/argmaxinc/argmax-oss-swift) (Whisper Large-v3, multilingual). You can speak English, Hindi or Hinglish; BRO hears it as English text.
 - **Thinking:** Llama 3.2 3B Instruct (4-bit) running locally with [MLX Swift](https://github.com/ml-explore/mlx-swift-lm).
 - **Speaking:** the built-in macOS voice.
 
@@ -11,7 +11,7 @@ Hearing, thinking and speaking all run on your Mac. No account, no API key.
 
 - A Mac with Apple Silicon (M1 or newer). Intel Macs do not work.
 - macOS 14 or newer.
-- About 3 GB free disk space. On first run BRO downloads its models (about 2.5 GB) once, so you need internet the first time.
+- Sufficient free disk space for the Whisper Large-v3 and Llama models. On first run BRO downloads its models, so an internet connection is required.
 - Tested only on a MacBook Air M4. Other Macs are untested.
 
 ## Install (the easy way)

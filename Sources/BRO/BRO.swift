@@ -480,7 +480,7 @@ let talkKeyCode = UInt32(kVK_Space)              // the key to hold ...
 let talkKeyMods = UInt32(optionKey)              // ... together with this one: Option + Space
 let silenceWait = 1.1                             // seconds of quiet before BRO decides you have finished talking
 let hearHindiAsEnglish = true                      // true: you can speak Hindi / Hinglish / English and BRO hears it as English text. false: English only (old way)
-let whisperModel = hearHindiAsEnglish ? "openai_whisper-small" : "openai_whisper-small.en"   // the multilingual one downloads once
+let whisperModel = hearHindiAsEnglish ? "openai_whisper-large-v3_947MB" : "openai_whisper-small.en"   // the multilingual one downloads once
 let useWikipedia = true                           // true: "who is / what is" questions are answered from Wikipedia (needs internet). false: the built-in brain always answers
 
 // Hook for fixing how your name is written on screen (does nothing for "friend").
